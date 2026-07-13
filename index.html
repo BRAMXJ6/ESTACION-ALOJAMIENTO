@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estación 285 | Alojamiento en Puerto Iguazú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #25D366; 
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --text: #333;
+            --accent: #d4af37; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Hero & Slider interactivo */
+        .hero-container {
+            position: relative;
+            height: 85vh;
+            color: #fff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: -1;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.55);
+            z-index: -1;
+        }
+
+        .badge-descuento {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 6px 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-container h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Formulario de Consulta Rápida */
+        .booking-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            width: 90%;
+            margin: -50px auto 0;
+            position: relative;
+            z-index: 10;
+            color: var(--dark);
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .input-group input, .input-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9.5rem;
+            outline: none;
+        }
+
+        .btn-buscar {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            align-self: flex-end;
+            height: 45px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-buscar:hover {
+            background-color: #20ba5a;
+        }
+
+        /* Contenedor General */
+        .container {
+            max-width: 1000px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        /* Características con efecto Hover */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Sección Reseñas Animadas */
+        .reviews {
+            background-color: var(--light);
+            padding: 60px 20px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+        }
+
+        .review-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .stars { color: #ffc107; margin-bottom: 10px; }
+
+        /* Ubicación */
+        .map-container {
+            position: relative;
+            padding-bottom: 50%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .map-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container h1 { font-size: 2.3rem; }
+            .booking-bar { flex-direction: column; gap: 10px; margin-top: -30px; }
+            .btn-buscar { align-self: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-container">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80')"></div>
+        
+        <div class="badge-descuento">🔥 Mejor precio garantizado web</div>
+        <h1>Estación 285</h1>
+        <p>Confort y modernidad en Puerto Iguazú. Tu lugar ideal para descansar después de las Cataratas.</p>
+    </header>
+
+    <div class="booking-bar">
+        <div class="input-group">
+            <label for="checkin">Entrada</label>
+            <input type="date" id="checkin">
+        </div>
+        <div class="input-group">
+            <label for="checkout">Salida</label>
+            <input type="date" id="checkout">
+        </div>
+        <div class="input-group">
+            <label for="guests">Huéspedes</label>
+            <select id="guests">
+                <option value="1">1 Persona</option>
+                <option value="2" selected>2 Personas</option>
+                <option value="3">3 Personas</option>
+                <option value="4">4 Personas</option>
+            </select>
+        </div>
+        <div class="input-group" style="flex: 1.2; min-width: 180px;">
+            <button class="btn-buscar" onclick="enviarConsultaWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>Lo que ofrecemos</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <h3>Aire Acondicionado</h3>
+                    <p>Climatización perfecta en todos los ambientes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-utensils"></i>
+                    <h3>Cocina Completa</h3>
+                    <p>Equipada con anafe, vajilla y electrodomésticos modernos.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-wifi"></i>
+                    <h3>Wi-Fi Premium</h3>
+                    <p>Conexión estable y veloz ideal para turistas.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Ubicación Clave</h3>
+                    <p>Zona tranquila, segura y con accesos rápidos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews">
+            <h2>Huéspedes felices</h2>
+            <div class="review-box">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"El departamento es hermoso, super moderno y limpio. La atención excelente. Muy cerca de todo."</p>
+                <strong style="display:block; margin-top:10px; font-size:0.85rem; color:#66px;">- Reseña de Booking.com</strong>
+            </div>
+        </section>
+
+        <section>
+            <h2>Dónde encontrarnos</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14389.747976694663!2d-54.5823157!3d-25.5986872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f693e36dfdc269%3A0xeb3f11905470d057!2sPuerto%20Iguaz%C3%BA%2C%20Misiones!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 Estación 285 - Puerto Iguazú, Misiones, Argentina.</p>
+    </footer>
+
+    <script>
+        // 1. CODIGO DEL SLIDER AUTOMÁTICO (Cambia las fotos del fondo solas)
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000); // Cambia la foto cada 5 segundos
+
+        // 2. LOGICA INTELIGENTE DE WHATSAPP
+        function enviarConsultaWhatsApp() {
+            // Reemplazar este número por el tuyo real (ej: 5493757123456)
+            const miTelefono = "5493757670865 "; 
+            
+            // Capturamos lo que el usuario puso en la pantalla
+            const entrada = document.getElementById('checkin').value;
+            const salida = document.getElementById('checkout').value;
+            const huespedes = document.getElementById('guests').value;
+
+            // Si el usuario no puso fechas, le mandamos un saludo general
+            let mensaje = "¡Hola Estación 285! Vi la página web y quería consultar por disponibilidad.";
+            
+            if(entrada && salida) {
+                // Si puso fechas, formateamos el mensaje bien prolijo
+                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${sal
