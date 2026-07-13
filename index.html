@@ -12,10 +12,10 @@
             --primary: #1b4d3e; /* Verde Selva Profundo */
             --whatsapp: #25D366; 
             --dark: #0f211a;
-            --light: #f1f6f3; /* Fondo Claro Verdoso */
+            --light: #f1f6f3; 
             --text: #2c3e35;
-            --accent: #d45b34; /* Terracota / Tierra Colorada Misionera */
-            --jungle-green: #2d7a5f; /* Verde Vibrante */
+            --accent: #d45b34; /* Terracota Misionera */
+            --jungle-green: #2d7a5f; 
         }
 
         * {
@@ -28,8 +28,7 @@
 
         body {
             color: var(--text);
-            background-color: #f5f8f6; /* Fondo general de la página */
-            /* Patrón sutil de hojas tropicales abstractas */
+            background-color: #f5f8f6; 
             background-image: radial-gradient(var(--light) 20%, transparent 20%),
                               radial-gradient(var(--light) 20%, transparent 20%);
             background-size: 40px 40px;
@@ -39,11 +38,11 @@
         }
 
         /* ==========================================
-           HERO & SLIDER RESPONSIVO (PERFECTO Y NÍTIDO)
+           HERO & SLIDER (CORREGIDO SIN CAPAS NEGRAS)
         ========================================== */
         .hero-container {
             position: relative;
-            height: 65vh; /* Altura optimizada para PC y balance de foto */
+            height: 65vh; 
             min-height: 420px;
             color: #fff;
             overflow: hidden;
@@ -53,13 +52,13 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            background-color: #121212;
+            background-color: #f5f8f6; /* Fondo claro si tarda en cargar */
         }
 
         .slide {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-size: contain; /* PC conserva formato original */
+            background-size: contain; 
             background-position: center;
             background-repeat: no-repeat;
             opacity: 0;
@@ -71,7 +70,7 @@
             opacity: 1; 
         }
 
-        /* Efecto Blur de fondo para PC - Oscuro solo a los laterales */
+        /* Desenfoque lateral sutil para PC */
         .slide::before {
             content: '';
             position: absolute;
@@ -79,19 +78,16 @@
             background-image: inherit;
             background-size: cover;
             background-position: center;
-            filter: blur(30px) brightness(0.35);
+            filter: blur(25px) brightness(0.6); /* Más brillo al fondo */
             z-index: -1;
         }
 
-        /* CAPA DE TEXTO SUPER SUAVE - No tapa el brillo de tu living */
+        /* ELIMINADA LA CAPA OSCURA QUE TE TAPABA EL LIVING */
         .hero-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.4) 100%);
-            z-index: 2;
+            display: none !important;
         }
 
+        /* Textos protegidos para que se lean sin oscurecer la foto */
         .hero-container h1, 
         .hero-container p, 
         .badge-descuento {
@@ -122,15 +118,23 @@
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 10px;
-            /* Sombra de texto reforzada para leer bien sobre la foto brillante */
-            text-shadow: 2px 4px 12px rgba(0,0,0,0.85), 0 0 10px rgba(0,0,0,0.5);
+            background: rgba(15, 33, 26, 0.45); /* Bloque suave protector de lectura */
+            padding: 5px 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(3px);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
         .hero-container p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            text-shadow: 1px 2px 6px rgba(0,0,0,0.8);
+            font-size: 1.25rem;
+            max-width: 720px;
             font-weight: 400;
+            background: rgba(15, 33, 26, 0.45); /* Bloque suave protector de lectura */
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(3px);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            margin-top: 5px;
         }
 
         /* ==========================================
@@ -229,7 +233,7 @@
             display: block;
             width: 70px;
             height: 4px;
-            background-color: var(--accent); /* Detalle Tierra Colorada */
+            background-color: var(--accent); 
             margin: 12px auto 0;
             border-radius: 2px;
         }
@@ -319,9 +323,7 @@
             padding-bottom: 25px;
         }
 
-        /* ==========================================
-           SECCIÓN RESEÑAS RE-DISEÑADA (MÁS COLOR)
-        ========================================== */
+        /* Sección Reseñas */
         .reviews { 
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); 
             padding: 60px 30px; 
@@ -333,9 +335,8 @@
             box-shadow: 0 15px 35px rgba(15, 33, 26, 0.25);
         }
 
-        /* Detalle decorativo selvático de fondo */
         .reviews::after {
-            content: '\f526'; /* Icono de Tucán / Ave de FontAwesome */
+            content: '\f526'; 
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
@@ -346,12 +347,8 @@
             color: #fff;
         }
 
-        .reviews h2 {
-            color: white;
-        }
-        .reviews h2::after {
-            background-color: var(--accent);
-        }
+        .reviews h2 { color: white; }
+        .reviews h2::after { background-color: var(--accent); }
 
         .review-box { 
             background: rgba(255, 255, 255, 0.08); 
@@ -365,12 +362,7 @@
             text-align: center;
         }
 
-        .review-box p {
-            font-size: 1.15rem;
-            font-style: italic;
-            letter-spacing: 0.3px;
-        }
-
+        .review-box p { font-size: 1.15rem; font-style: italic; letter-spacing: 0.3px; }
         .stars { color: #ffca28; margin-bottom: 15px; font-size: 1.2rem; }
         
         /* Ubicación */
@@ -385,7 +377,7 @@
         }
         .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         
-        /* Botón WhatsApp Flotante */
+        /* Botón WhatsApp */
         .btn-whatsapp-flotante {
             position: fixed;
             bottom: 50px;
@@ -406,9 +398,7 @@
             transition: transform 0.3s;
         }
 
-        .btn-whatsapp-flotante:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
+        .btn-whatsapp-flotante:hover { transform: scale(1.1) rotate(10deg); }
 
         @keyframes whatsappAlert {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
@@ -441,12 +431,12 @@
                 min-height: 360px;
             }
             .slide {
-                background-size: cover !important;
+                background-size: cover !important; /* Llena la pantalla en vertical */
                 background-position: center center;
             }
             .slide::before { display: none; }
-            .hero-container h1 { font-size: 2.3rem; margin-bottom: 5px; }
-            .hero-container p { font-size: 1rem; padding: 0 10px; }
+            .hero-container h1 { font-size: 2.1rem; margin-bottom: 8px; padding: 5px 15px; }
+            .hero-container p { font-size: 0.95rem; padding: 8px 12px; max-width: 90%; }
             .booking-bar { flex-direction: column; gap: 12px; margin-top: -30px; padding: 18px; width: 92%; }
             .btn-whatsapp-flotante { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 30px; }
             .map-container { padding-bottom: 65%; }
@@ -455,12 +445,10 @@
 </head>
 <body>
 
-    <!-- 🟢 BOTÓN FLOTANTE ANIMADO DE WHATSAPP -->
     <a href="#" onclick="enviarConsultaWhatsApp(); return false;" class="btn-whatsapp-flotante">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- PORTADA NÍTIDA Y ENFOCADA -->
     <header class="hero-container">
         <div class="slide active" style="background-image: url('living amplio 2.jpeg')"></div>
         <div class="slide" style="background-image: url('living.jpeg')"></div>
@@ -471,7 +459,6 @@
         <p>Viví la magia de las Cataratas. Descansá en departamentos modernos y completamente equipados en el corazón de Iguazú.</p>
     </header>
 
-    <!-- BARRA INTERACTIVA -->
     <div class="booking-bar">
         <div class="input-group">
             <label for="checkin">Entrada</label>
@@ -500,7 +487,6 @@
     </div>
 
     <div class="container">
-        <!-- COMODIDADES -->
         <section>
             <h2>Tu confort en Iguazú</h2>
             <div class="features">
@@ -537,7 +523,6 @@
             </div>
         </section>
 
-        <!-- ÁLBUM DE NUESTROS ESPACIOS INTERACTIVO -->
         <section>
             <h2>Conocé Estación 285</h2>
             <div class="gallery-grid">
@@ -595,7 +580,6 @@
             </div>
         </section>
 
-        <!-- OPINIONES DESTACADAS SELVÁTICAS -->
         <section class="reviews">
             <h2>Huéspedes felices</h2>
             <div class="review-box">
@@ -609,7 +593,6 @@
             </div>
         </section>
 
-        <!-- UBICACIÓN EXACTA DE GOOGLE MAPS -->
         <section>
             <h2>Dónde encontrarnos</h2>
             <div class="map-container">
@@ -618,7 +601,6 @@
         </section>
     </div>
 
-    <!-- INTERFAZ LIGHTBOX FLOTANTE -->
     <div id="miLightbox" class="lightbox" onclick="cerrarImagen()">
         <span class="lightbox-close" onclick="cerrarImagen()">×</span>
         <img class="lightbox-img" id="imgAmpliada">
