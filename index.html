@@ -232,7 +232,7 @@
             transform: scale(1.1);
         }
 
-        /* 📸 EFECTO HOVER PRO EN EL ÁLBUM DE FOTOS */
+        /* Álbum de Fotos (Gallery Grid) con Efecto Hover Pro */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -268,7 +268,6 @@
             transition: all 0.4s ease;
         }
 
-        /* Al pasar el mouse, la foto toma vida */
         .gallery-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
@@ -308,7 +307,6 @@
             transform: scale(1.1) rotate(10deg);
         }
 
-        /* Animación combinada de vibración + pulso de onda */
         @keyframes whatsappAlert {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
             10% { transform: scale(1.1) rotate(-8deg); }
@@ -326,3 +324,223 @@
             justify-content: center; align-items: center;
             opacity: 0; transition: opacity 0.3s ease;
         }
+        .lightbox.open { display: flex; opacity: 1; }
+        .lightbox-img { max-width: 90%; max-height: 82vh; border-radius: 12px; transform: scale(0.95); transition: transform 0.3s ease; }
+        .lightbox.open .lightbox-img { transform: scale(1); }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; }
+
+        /* Reseñas y Mapa */
+        .reviews { background-color: var(--light); padding: 60px 20px; border-radius: 24px; margin-bottom: 70px; }
+        .review-box { background: #fff; padding: 25px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .stars { color: #ffc107; margin-bottom: 10px; }
+        
+        .map-container { 
+            position: relative; 
+            padding-bottom: 45%; 
+            height: 0; 
+            overflow: hidden; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
+        }
+        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        
+        footer { background-color: var(--dark); color: rgba(255,255,255,0.8); text-align: center; padding: 45px 20px; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero-container h1 { font-size: 2.5rem; }
+            .hero-container p { font-size: 1.1rem; }
+            .booking-bar { flex-direction: column; gap: 12px; margin-top: -30px; padding: 18px; }
+            .btn-whatsapp-flotante { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🟢 BOTÓN FLOTANTE ANIMADO DE WHATSAPP -->
+    <a href="#" onclick="enviarConsultaWhatsApp(); return false;" class="btn-whatsapp-flotante">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- PORTADA -->
+    <header class="hero-container">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1596122557022-b48aa92fb689?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1626081404179-880c5112f459?auto=format&fit=crop&w=1600&q=80')"></div>
+        
+        <div class="badge-descuento">🔥 RESERVA DIRECTA: 10% OFF INCLUIDO</div>
+        <h1>Estación 285</h1>
+        <p>Viví la magia de las Cataratas. Descansá en departamentos modernos y completamente equipados en el corazón de Iguazú.</p>
+    </header>
+
+    <!-- BARRA INTERACTIVA -->
+    <div class="booking-bar">
+        <div class="input-group">
+            <label for="checkin">Entrada</label>
+            <input type="date" id="checkin">
+        </div>
+        <div class="input-group">
+            <label for="checkout">Salida</label>
+            <input type="date" id="checkout">
+        </div>
+        <div class="input-group">
+            <label for="guests">Huéspedes</label>
+            <select id="guests">
+                <option value="1">1 Persona</option>
+                <option value="2" selected>2 Personas</option>
+                <option value="3">3 Personas</option>
+                <option value="4">4 Personas</option>
+            </select>
+        </div>
+        <div class="input-group" style="flex: 1.2; min-width: 180px;">
+            <button class="btn-buscar" onclick="enviarConsultaWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Consultar Disponibilidad
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- COMODIDADES -->
+        <section>
+            <h2>Tu confort en Iguazú</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fa-solid fa-square-parking"></i>
+                    <h3>Parking Privado Gratis</h3>
+                    <p>Dejá tu vehículo seguro dentro del establecimiento sin costo adicional.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <h3>Parrilla / Asador</h3>
+                    <p>Espacio ideal para preparar un buen asado al terminar el día.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-tree"></i>
+                    <h3>Patio Exterior</h3>
+                    <p>Un sector al aire libre para relajarse y disfrutar del clima misionero.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <h3>Aire Acondicionado</h3>
+                    <p>Climatización perfecta y confort térmico en todos los ambientes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-utensils"></i>
+                    <h3>Cocina Completa</h3>
+                    <p>Equipada con anafe, vajilla y electrodomésticos.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-wifi"></i>
+                    <h3>Wi-Fi Premium</h3>
+                    <p>Conexión estable y veloz para planificar tus días.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ÁLBUM DE NUESTROS ESPACIOS INTERACTIVO -->
+        <section>
+            <h2>Conocé Estación 285</h2>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="habitacion.jpg" alt="Habitación Principal">
+                    <div class="gallery-label">Habitaciones Modernas</div>
+                </div>
+
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="bano.jpg" alt="Baño">
+                    <div class="gallery-label">Baño Equipado e Impecable</div>
+                </div>
+
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="cocina.jpg" alt="Cocina Living">
+                    <div class="gallery-label">Cocina y Comedor Completo</div>
+                </div>
+
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="patio.jpg" alt="Patio Exterior y Asador">
+                    <div class="gallery-label">Patio y Parrilla</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- OPINIONES -->
+        <section class="reviews">
+            <h2>Huéspedes felices</h2>
+            <div class="review-box">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"El departamento es hermoso, super moderno y limpio. La atención excelente. Muy cerca de todo para ir a las Cataratas."</p>
+                <strong style="display:block; margin-top:10px; font-size:0.85rem; color:#666;">- Huésped de Booking.com</strong>
+            </div>
+        </section>
+
+        <!-- UBICACIÓN EXACTA DE GOOGLE MAPS -->
+        <section>
+            <h2>Dónde encontrarnos</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.8932292783315!2d-54.58442742407026!3d-25.608463939977877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f692472bb3ff49%3A0x7fab0c1717d4c51e!2sAn%C3%ADbal%20Moretti%20285%2C%20N3370AKG%20Puerto%20Iguaz%C3%BA%2C%20Misiones!5e0!3m2!1ses-419!2sar!4v1783956416833!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <!-- INTERFAZ LIGHTBOX FLOTANTE -->
+    <div id="miLightbox" class="lightbox" onclick="cerrarImagen()">
+        <span class="lightbox-close" onclick="cerrarImagen()">×</span>
+        <img class="lightbox-img" id="imgAmpliada">
+    </div>
+
+    <footer>
+        <p>© 2026 Estación 285 - Puerto Iguazú, Misiones, Argentina.</p>
+    </footer>
+
+    <script>
+        // Slider automático de la portada
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            if(slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+        setInterval(nextSlide, 5000); 
+
+        // Lightbox interactivo (Ampliar fotos y bloquear Google Lens)
+        function abrirImagen(elemento) {
+            const rutaImagen = elemento.querySelector('img').src;
+            const lightbox = document.getElementById('miLightbox');
+            document.getElementById('imgAmpliada').src = rutaImagen;
+            lightbox.classList.add('open');
+        }
+
+        /* Modificado para asegurar cierre inmediato */
+        function cerrarImagen() {
+            document.getElementById('miLightbox').classList.remove('open');
+        }
+
+        // Sistema dinámico de consultas por WhatsApp
+        function enviarConsultaWhatsApp() {
+            const miTelefono = "5493757670865"; 
+            const entrada = document.getElementById('checkin').value;
+            const salida = document.getElementById('checkout').value;
+            const huespedes = document.getElementById('guests').value;
+
+            let mensaje = "¡Hola Estación 285! Vi la página web y quería consultar por disponibilidad.";
+            
+            if(entrada && salida) {
+                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${salida}\n👥 Huéspedes: ${huespedes}`;
+            } else if (huespedes) {
+                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad para un viaje de ${huespedes} personas.`;
+            }
+
+            const mensajeEncriptado = encodeURIComponent(mensaje);
+            window.location.href = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
+        }
+
+        // Restricción de fechas pasadas en los calendarios
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = hoy;
+        document.getElementById('checkout').min = hoy;
+    </script>
+</body>
+</html>
