@@ -9,11 +9,13 @@
     
     <style>
         :root {
-            --primary: #25D366; 
-            --dark: #121212;
-            --light: #f8f9fa;
-            --text: #333;
-            --accent: #d4af37; 
+            --primary: #1b4d3e; /* Verde Selva Profundo */
+            --whatsapp: #25D366; 
+            --dark: #0f211a;
+            --light: #f1f6f3; /* Fondo Claro Verdoso */
+            --text: #2c3e35;
+            --accent: #d45b34; /* Terracota / Tierra Colorada Misionera */
+            --jungle-green: #2d7a5f; /* Verde Vibrante */
         }
 
         * {
@@ -26,90 +28,50 @@
 
         body {
             color: var(--text);
-            background-color: #fff;
+            background-color: #f5f8f6; /* Fondo general de la página */
+            /* Patrón sutil de hojas tropicales abstractas */
+            background-image: radial-gradient(var(--light) 20%, transparent 20%),
+                              radial-gradient(var(--light) 20%, transparent 20%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-
-      /* ==========================================
-           HERO & SLIDER RESPONSIVO (CORREGIDO)
+        /* ==========================================
+           HERO & SLIDER RESPONSIVO (PERFECTO Y NÍTIDO)
         ========================================== */
         .hero-container {
-
             position: relative;
-
-            height: 85vh;
-
+            height: 65vh; /* Altura optimizada para PC y balance de foto */
+            min-height: 420px;
             color: #fff;
-
             overflow: hidden;
-
             display: flex;
-
             flex-direction: column;
-
             justify-content: center;
-
             align-items: center;
-
             text-align: center;
-
             padding: 20px;
-
+            background-color: #121212;
         }
-
-
 
         .slide {
-
             position: absolute;
-
             top: 0; left: 0; width: 100%; height: 100%;
-
-            background-size: cover;
-
+            background-size: contain; /* PC conserva formato original */
             background-position: center;
-
+            background-repeat: no-repeat;
             opacity: 0;
-
-            transform: scale(1.05);
-
-            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
-
-            z-index: -1;
-
+            transition: opacity 1.2s ease-in-out;
+            z-index: 1;
         }
-
-
 
         .slide.active { 
-
             opacity: 1; 
-
-            transform: scale(1);
-
         }
 
-
-
-        .hero-container::before {
-
-            content: '';
-
-            position: absolute;
-
-            top: 0; left: 0; width: 100%; height: 100%;
-
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.65));
-
-            z-index: -1;
-
-        } 
-
-
-
-        /* Efecto Blur de fondo para PC */
+        /* Efecto Blur de fondo para PC - Oscuro solo a los laterales */
         .slide::before {
             content: '';
             position: absolute;
@@ -117,20 +79,16 @@
             background-image: inherit;
             background-size: cover;
             background-position: center;
-            filter: blur(25px) brightness(0.45);
+            filter: blur(30px) brightness(0.35);
             z-index: -1;
         }
 
-        .slide.active { 
-            opacity: 1; 
-        }
-
-        /* Capa oscura para que resalte el texto */
+        /* CAPA DE TEXTO SUPER SUAVE - No tapa el brillo de tu living */
         .hero-container::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.4) 100%);
             z-index: 2;
         }
 
@@ -141,116 +99,58 @@
             z-index: 3;
         }
 
-        /* ==========================================
-           AJUSTES CRÍTICOS PARA CELULARES (RESPONSIVE)
-        ========================================== */
-        @media (max-width: 768px) {
-            .hero-container { 
-                height: 55vh; /* Le damos buena altura en el celu */
-                min-height: 350px;
-            }
-            
-            .slide {
-                background-size: cover !important; /* ¡Clave! Fuerza a la foto a cubrir todo el fondo en el celu */
-                background-position: center center;
-            }
-            
-            .slide::before {
-                display: none; /* Desactivamos el blur en celu porque no hace falta */
-            }
-
-            .hero-container h1 { 
-                font-size: 2.3rem; 
-                margin-bottom: 5px;
-            }
-            
-            .hero-container p { 
-                font-size: 1rem; 
-                padding: 0 10px;
-            }
-            
-            /* Ajuste de la barra de reservas en celu */
-            .booking-bar { 
-                flex-direction: column; 
-                gap: 12px; 
-                margin-top: -30px; 
-                padding: 18px; 
-                width: 92%;
-            }
-            
-            .btn-whatsapp-flotante { 
-                bottom: 20px; 
-                right: 20px; 
-                width: 55px; 
-                height: 55px; 
-                font-size: 30px; 
-            }
-        }
-
-        /* Forzamos a que los textos queden siempre por encima del fondo */
-        .hero-container h1, 
-        .hero-container p, 
-        .badge-descuento {
-            position: relative;
-            z-index: 3;
-        }
-
-        .hero-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.65));
-            z-index: -1;
-        }
-
         .badge-descuento {
             background-color: var(--accent);
-            color: var(--dark);
+            color: #fff;
             padding: 6px 18px;
             font-weight: 700;
             border-radius: 50px;
             margin-bottom: 15px;
             font-size: 0.9rem;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(212, 91, 52, 0.4);
             animation: pulseGlow 2s infinite;
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 4px 25px rgba(212, 175, 55, 0.6); }
-            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 4px 25px rgba(212, 91, 52, 0.7); }
+            100% { transform: scale(1); }
         }
 
         .hero-container h1 {
-            font-size: 3.8rem;
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 10px;
-            text-shadow: 2px 4px 8px rgba(0,0,0,0.6);
+            /* Sombra de texto reforzada para leer bien sobre la foto brillante */
+            text-shadow: 2px 4px 12px rgba(0,0,0,0.85), 0 0 10px rgba(0,0,0,0.5);
         }
 
         .hero-container p {
             font-size: 1.3rem;
             max-width: 700px;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.5);
-            font-weight: 300;
+            text-shadow: 1px 2px 6px rgba(0,0,0,0.8);
+            font-weight: 400;
         }
 
-        /* Barra de Reservas con efecto de brillo */
+        /* ==========================================
+           BARRA DE RESERVAS SELVÁTICA
+        ========================================== */
         .booking-bar {
             background: white;
             padding: 25px;
             border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 15px 40px rgba(27, 77, 62, 0.15);
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
             max-width: 850px;
             width: 90%;
-            margin: -50px auto 0;
+            margin: -40px auto 0;
             position: relative;
             z-index: 10;
             color: var(--dark);
+            border-bottom: 4px solid var(--jungle-green);
         }
 
         .input-group {
@@ -264,26 +164,27 @@
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 6px;
-            color: #555;
+            color: var(--jungle-green);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .input-group input, .input-group select {
             padding: 12px;
-            border: 2px solid #eee;
+            border: 2px solid #e1ebe6;
             border-radius: 10px;
             font-size: 0.95rem;
             outline: none;
             transition: border-color 0.3s;
+            background-color: #fafdfb;
         }
 
         .input-group input:focus, .input-group select:focus {
-            border-color: var(--accent);
+            border-color: var(--jungle-green);
         }
 
         .btn-buscar {
-            background-color: var(--primary);
+            background-color: var(--whatsapp);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -320,19 +221,20 @@
             font-size: 2.2rem;
             margin-bottom: 40px;
             font-weight: 700;
+            color: var(--primary);
         }
 
         h2::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 70px;
             height: 4px;
-            background-color: var(--accent);
+            background-color: var(--accent); /* Detalle Tierra Colorada */
             margin: 12px auto 0;
             border-radius: 2px;
         }
 
-        /* Tarjetas de Características Interactiva */
+        /* Tarjetas de Características */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -341,23 +243,24 @@
         }
 
         .feature-card {
-            background: var(--light);
+            background: #fff;
             padding: 35px 25px;
             border-radius: 16px;
             text-align: center;
-            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid #e9f0ec;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.06);
-            background: #fff;
+            box-shadow: 0 15px 30px rgba(27, 77, 62, 0.1);
+            border-color: var(--jungle-green);
         }
 
         .feature-card i {
             font-size: 2.8rem;
-            color: var(--accent);
+            color: var(--jungle-green);
             margin-bottom: 18px;
             transition: transform 0.3s;
         }
@@ -366,7 +269,7 @@
             transform: scale(1.1);
         }
 
-        /* Álbum de Fotos (Gallery Grid) con Efecto Hover Pro */
+        /* Álbum de Fotos */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -394,7 +297,7 @@
         .gallery-label {
             position: absolute;
             bottom: 0; left: 0; width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            background: linear-gradient(transparent, rgba(15, 33, 26, 0.9));
             color: white;
             padding: 20px 15px;
             font-size: 1.05rem;
@@ -404,7 +307,7 @@
 
         .gallery-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(27, 77, 62, 0.2);
         }
 
         .gallery-item:hover img {
@@ -416,12 +319,78 @@
             padding-bottom: 25px;
         }
 
-        /* 🟢 BOTÓN WHATSAPP VIVO Y LLAMATIVO (Flotante Fijo) */
+        /* ==========================================
+           SECCIÓN RESEÑAS RE-DISEÑADA (MÁS COLOR)
+        ========================================== */
+        .reviews { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); 
+            padding: 60px 30px; 
+            border-radius: 24px; 
+            margin-bottom: 70px; 
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(15, 33, 26, 0.25);
+        }
+
+        /* Detalle decorativo selvático de fondo */
+        .reviews::after {
+            content: '\f526'; /* Icono de Tucán / Ave de FontAwesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            font-size: 9rem;
+            opacity: 0.06;
+            color: #fff;
+        }
+
+        .reviews h2 {
+            color: white;
+        }
+        .reviews h2::after {
+            background-color: var(--accent);
+        }
+
+        .review-box { 
+            background: rgba(255, 255, 255, 0.08); 
+            backdrop-filter: blur(5px);
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+            border: 1px solid rgba(255,255,255,0.15);
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .review-box p {
+            font-size: 1.15rem;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        .stars { color: #ffca28; margin-bottom: 15px; font-size: 1.2rem; }
+        
+        /* Ubicación */
+        .map-container { 
+            position: relative; 
+            padding-bottom: 45%; 
+            height: 0; 
+            overflow: hidden; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 25px rgba(27, 77, 62, 0.15); 
+            border: 3px solid white;
+        }
+        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        
+        /* Botón WhatsApp Flotante */
         .btn-whatsapp-flotante {
             position: fixed;
             bottom: 50px;
             right: 30px;
-            background-color: var(--primary);
+            background-color: var(--whatsapp);
             color: white;
             width: 65px;
             height: 65px;
@@ -450,11 +419,11 @@
             60% { transform: scale(1); }
         }
 
-        /* Interfaz Lightbox */
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.92);
+            background-color: rgba(0, 0, 0, 0.94);
             justify-content: center; align-items: center;
             opacity: 0; transition: opacity 0.3s ease;
         }
@@ -463,28 +432,24 @@
         .lightbox.open .lightbox-img { transform: scale(1); }
         .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; }
 
-        /* Reseñas y Mapa */
-        .reviews { background-color: var(--light); padding: 60px 20px; border-radius: 24px; margin-bottom: 70px; }
-        .review-box { background: #fff; padding: 25px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .stars { color: #ffc107; margin-bottom: 10px; }
-        
-        .map-container { 
-            position: relative; 
-            padding-bottom: 45%; 
-            height: 0; 
-            overflow: hidden; 
-            border-radius: 20px; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
-        }
-        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        
-        footer { background-color: var(--dark); color: rgba(255,255,255,0.8); text-align: center; padding: 45px 20px; font-size: 0.9rem; }
+        footer { background-color: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 45px 20px; font-size: 0.9rem; border-top: 3px solid var(--accent); }
 
+        /* RESPONSIVE AJUSTES */
         @media (max-width: 768px) {
-            .hero-container h1 { font-size: 2.5rem; }
-            .hero-container p { font-size: 1.1rem; }
-            .booking-bar { flex-direction: column; gap: 12px; margin-top: -30px; padding: 18px; }
+            .hero-container { 
+                height: 52vh; 
+                min-height: 360px;
+            }
+            .slide {
+                background-size: cover !important;
+                background-position: center center;
+            }
+            .slide::before { display: none; }
+            .hero-container h1 { font-size: 2.3rem; margin-bottom: 5px; }
+            .hero-container p { font-size: 1rem; padding: 0 10px; }
+            .booking-bar { flex-direction: column; gap: 12px; margin-top: -30px; padding: 18px; width: 92%; }
             .btn-whatsapp-flotante { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 30px; }
+            .map-container { padding-bottom: 65%; }
         }
     </style>
 </head>
@@ -495,11 +460,11 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- PORTADA -->
+    <!-- PORTADA NÍTIDA Y ENFOCADA -->
     <header class="hero-container">
         <div class="slide active" style="background-image: url('living amplio 2.jpeg')"></div>
         <div class="slide" style="background-image: url('living.jpeg')"></div>
-         <div class="slide" style="background-image: url('living y cocina.jpeg')"></div>
+        <div class="slide" style="background-image: url('living y cocina.jpeg')"></div>
         
         <div class="badge-descuento">🔥 RESERVA DIRECTA: 10% OFF INCLUIDO</div>
         <h1>Estación 285</h1>
@@ -630,13 +595,17 @@
             </div>
         </section>
 
-        <!-- OPINIONES -->
+        <!-- OPINIONES DESTACADAS SELVÁTICAS -->
         <section class="reviews">
             <h2>Huéspedes felices</h2>
             <div class="review-box">
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
                 <p>"El departamento es hermoso, super moderno y limpio. La atención excelente. Muy cerca de todo para ir a las Cataratas."</p>
-                <strong style="display:block; margin-top:10px; font-size:0.85rem; color:#666;">- Huésped de Booking.com</strong>
+                <strong style="display:block; margin-top:15px; font-size:0.9rem; color:rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px;">
+                    - Huésped de Booking.com
+                </strong>
             </div>
         </section>
 
@@ -672,7 +641,7 @@
         }
         setInterval(nextSlide, 5000); 
 
-        // Lightbox interactivo (Ampliar fotos y bloquear Google Lens)
+        // Lightbox interactivo
         function abrirImagen(elemento) {
             const rutaImagen = elemento.querySelector('img').src;
             const lightbox = document.getElementById('miLightbox');
@@ -680,7 +649,6 @@
             lightbox.classList.add('open');
         }
 
-        /* Modificado para asegurar cierre inmediato */
         function cerrarImagen() {
             document.getElementById('miLightbox').classList.remove('open');
         }
@@ -704,7 +672,7 @@
             window.location.href = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
         }
 
-        // Restricción de fechas pasadas en los calendarios
+        // Restricción de fechas pasadas
         const hoy = new Date().toISOString().split('T')[0];
         document.getElementById('checkin').min = hoy;
         document.getElementById('checkout').min = hoy;
