@@ -30,7 +30,7 @@
             line-height: 1.6;
         }
 
-        /* Hero & Slider interactivo */
+        /* Hero & Slider */
         .hero-container {
             position: relative;
             height: 85vh;
@@ -46,10 +46,7 @@
 
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
             opacity: 0;
@@ -57,15 +54,13 @@
             z-index: -1;
         }
 
-        .slide.active {
-            opacity: 1;
-        }
+        .slide.active { opacity: 1; }
 
         .hero-container::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.50);
             z-index: -1;
         }
 
@@ -91,10 +86,17 @@
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
 
-        /* Formulario de Consulta Rápida */
+        .hero-container p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 300;
+        }
+
+        /* Barra de Reservas */
         .booking-bar {
             background: white;
             padding: 20px;
@@ -129,7 +131,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 0.9.5rem;
+            font-size: 0.95rem;
             outline: none;
         }
 
@@ -151,11 +153,9 @@
             transition: background 0.3s;
         }
 
-        .btn-buscar:hover {
-            background-color: #20ba5a;
-        }
+        .btn-buscar:hover { background-color: #20ba5a; }
 
-        /* Contenedor General */
+        /* Contenedor */
         .container {
             max-width: 1000px;
             margin: 80px auto 60px;
@@ -166,9 +166,19 @@
             text-align: center;
             font-size: 2rem;
             margin-bottom: 40px;
+            position: relative;
         }
 
-        /* Características con efecto Hover */
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+        }
+
+        /* Características */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -181,12 +191,6 @@
             padding: 30px 20px;
             border-radius: 12px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .feature-card i {
@@ -195,7 +199,44 @@
             margin-bottom: 15px;
         }
 
-        /* Sección Reseñas Animadas */
+        /* NUEVA SECCIÓN: ÁLBUM DE FOTOS (GALLERY) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            height: 220px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-label {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Reseñas */
         .reviews {
             background-color: var(--light);
             padding: 60px 20px;
@@ -207,7 +248,6 @@
             background: #fff;
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             margin-bottom: 20px;
         }
 
@@ -215,11 +255,7 @@
 
         /* Ubicación */
         .map-container {
-            position: relative;
-            padding-bottom: 50%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 15px;
+            position: relative; padding-bottom: 50%; height: 0; overflow: hidden; border-radius: 15px;
         }
 
         .map-container iframe {
@@ -227,31 +263,29 @@
         }
 
         footer {
-            background-color: var(--dark);
-            color: #fff;
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.9rem;
+            background-color: var(--dark); color: #fff; text-align: center; padding: 40px 20px; font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
             .hero-container h1 { font-size: 2.3rem; }
+            .hero-container p { font-size: 1rem; }
             .booking-bar { flex-direction: column; gap: 10px; margin-top: -30px; }
-            .btn-buscar { align-self: stretch; }
         }
     </style>
 </head>
 <body>
 
+    <!-- PORTADA -->
     <header class="hero-container">
-        <div class="slide active" style="background-image: url('completo.jpeg')"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1596122557022-b48aa92fb689?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1626081404179-880c5112f459?auto=format&fit=crop&w=1600&q=80')"></div>
         
-        <div class="badge-descuento">🔥 Mejor precio garantizado web</div>
+        <div class="badge-descuento">🔥 RESERVA DIRECTA: Mejor Precio Garantizado</div>
         <h1>Estación 285</h1>
-        <p>Confort y modernidad en Puerto Iguazú. Tu lugar ideal para descansar después de las Cataratas.</p>
+        <p>Viví la magia de las Cataratas. Descansá en departamentos modernos y completamente equipados en el corazón de Iguazú.</p>
     </header>
 
+    <!-- BARRA INTERACTIVA -->
     <div class="booking-bar">
         <div class="input-group">
             <label for="checkin">Entrada</label>
@@ -278,8 +312,9 @@
     </div>
 
     <div class="container">
+        <!-- COMODIDADES -->
         <section>
-            <h2>Lo que ofrecemos</h2>
+            <h2>Tu confort en Iguazú</h2>
             <div class="features">
                 <div class="feature-card">
                     <i class="fa-solid fa-snowflake"></i>
@@ -289,30 +324,64 @@
                 <div class="feature-card">
                     <i class="fa-solid fa-utensils"></i>
                     <h3>Cocina Completa</h3>
-                    <p>Equipada con anafe, vajilla y electrodomésticos modernos.</p>
+                    <p>Equipada con anafe, vajilla y electrodomésticos.</p>
                 </div>
                 <div class="feature-card">
                     <i class="fa-solid fa-wifi"></i>
                     <h3>Wi-Fi Premium</h3>
-                    <p>Conexión estable y veloz ideal para turistas.</p>
+                    <p>Conexión estable y veloz para planificar tus días.</p>
                 </div>
                 <div class="feature-card">
                     <i class="fa-solid fa-location-dot"></i>
                     <h3>Ubicación Clave</h3>
-                    <p>Zona tranquila, segura y con accesos rápidos.</p>
+                    <p>Zona tranquila, segura y de rápido acceso.</p>
                 </div>
             </div>
         </section>
 
+        <!-- 📸 NUEVA SECCIÓN: ÁLBUM DE NUESTROS ESPACIOS -->
+        <section>
+            <h2>Conocé Estación 285</h2>
+            <div class="gallery-grid">
+                
+                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto de la Habitación -->
+                <div class="gallery-item">
+                    <img src="habitacion.jpg" alt="Habitación Principal">
+                    <div class="gallery-label">Habitaciones Modernas</div>
+                </div>
+
+                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto del Baño -->
+                <div class="gallery-item">
+                    <img src="bano.jpg" alt="Baño">
+                    <div class="gallery-label">Baño Equipado e Impecable</div>
+                </div>
+
+                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto del Living/Cocina -->
+                <div class="gallery-item">
+                    <img src="cocina.jpg" alt="Cocina Living">
+                    <div class="gallery-label">Cocina y Comedor Completo</div>
+                </div>
+
+                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto del Patio o Fachada -->
+                <div class="gallery-item">
+                    <img src="patio.jpg" alt="Patio Exterior">
+                    <div class="gallery-label">Accesos y Exteriores</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- OPINIONES -->
         <section class="reviews">
             <h2>Huéspedes felices</h2>
             <div class="review-box">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"El departamento es hermoso, super moderno y limpio. La atención excelente. Muy cerca de todo."</p>
-                <strong style="display:block; margin-top:10px; font-size:0.85rem; color:#66px;">- Reseña de Booking.com</strong>
+                <p>"El departamento es hermoso, super moderno y limpio. La atención excelente. Muy cerca de todo para ir a las Cataratas."</p>
+                <strong style="display:block; margin-top:10px; font-size:0.85rem; color:#666;">- Huésped de Booking.com</strong>
             </div>
         </section>
 
+        <!-- UBICACIÓN -->
         <section>
             <h2>Dónde encontrarnos</h2>
             <div class="map-container">
@@ -326,30 +395,47 @@
     </footer>
 
     <script>
-        // 1. CODIGO DEL SLIDER AUTOMÁTICO (Cambia las fotos del fondo solas)
+        // Slider automático
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-
         function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
+            if(slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
         }
-        setInterval(nextSlide, 5000); // Cambia la foto cada 5 segundos
+        setInterval(nextSlide, 5000); 
 
-        // 2. LOGICA INTELIGENTE DE WHATSAPP
+        // MOTOR DE WHATSAPP REPARADO Y OPTIMIZADO
         function enviarConsultaWhatsApp() {
-            // Reemplazar este número por el tuyo real (ej: 5493757123456)
-            const miTelefono = "5493757670865 "; 
+            // Número limpio y sin espacios de Argentina
+            const miTelefono = "5493757670865"; 
             
-            // Capturamos lo que el usuario puso en la pantalla
             const entrada = document.getElementById('checkin').value;
             const salida = document.getElementById('checkout').value;
             const huespedes = document.getElementById('guests').value;
 
-            // Si el usuario no puso fechas, le mandamos un saludo general
             let mensaje = "¡Hola Estación 285! Vi la página web y quería consultar por disponibilidad.";
             
             if(entrada && salida) {
-                // Si puso fechas, formateamos el mensaje bien prolijo
-                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${sal
+                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${salida}\n👥 Personas: ${huespedes}`;
+            } else if (huespedes) {
+                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad para un viaje de ${huespedes} personas.`;
+            }
+
+            const mensajeEncriptado = encodeURIComponent(mensaje);
+            
+            // Enlace universal para que abra sí o sí en PC y celulares
+            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
+            
+            window.location.href = urlWhatsApp;
+        }
+
+        // Bloquear fechas pasadas
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = hoy;
+        document.getElementById('checkout').min = hoy;
+    </script>
+</body>
+</html>
