@@ -38,7 +38,7 @@
         }
 
         /* ==========================================
-           HERO & SLIDER (CORREGIDO SIN CAPAS NEGRAS)
+           HERO & SLIDER
         ========================================== */
         .hero-container {
             position: relative;
@@ -52,7 +52,7 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            background-color: #f5f8f6; /* Fondo claro si tarda en cargar */
+            background-color: #f5f8f6;
         }
 
         .slide {
@@ -70,7 +70,6 @@
             opacity: 1; 
         }
 
-        /* Desenfoque lateral sutil para PC */
         .slide::before {
             content: '';
             position: absolute;
@@ -78,16 +77,14 @@
             background-image: inherit;
             background-size: cover;
             background-position: center;
-            filter: blur(25px) brightness(0.6); /* Más brillo al fondo */
+            filter: blur(25px) brightness(0.6); 
             z-index: -1;
         }
 
-        /* ELIMINADA LA CAPA OSCURA QUE TE TAPABA EL LIVING */
         .hero-container::before {
             display: none !important;
         }
 
-        /* Textos protegidos para que se lean sin oscurecer la foto */
         .hero-container h1, 
         .hero-container p, 
         .badge-descuento {
@@ -118,7 +115,7 @@
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 10px;
-            background: rgba(15, 33, 26, 0.45); /* Bloque suave protector de lectura */
+            background: rgba(15, 33, 26, 0.45); 
             padding: 5px 25px;
             border-radius: 12px;
             backdrop-filter: blur(3px);
@@ -129,7 +126,7 @@
             font-size: 1.25rem;
             max-width: 720px;
             font-weight: 400;
-            background: rgba(15, 33, 26, 0.45); /* Bloque suave protector de lectura */
+            background: rgba(15, 33, 26, 0.45); 
             padding: 10px 20px;
             border-radius: 10px;
             backdrop-filter: blur(3px);
@@ -138,7 +135,7 @@
         }
 
         /* ==========================================
-           BARRA DE RESERVAS SELVÁTICA
+           BARRA DE RESERVAS
         ========================================== */
         .booking-bar {
             background: white;
@@ -273,7 +270,7 @@
             transform: scale(1.1);
         }
 
-        /* Álbum de Fotos */
+        /* Álbum de Fotos (Gallery Grid) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -377,78 +374,155 @@
         }
         .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         
-        /* Botón WhatsApp */
+        /* ==========================================
+           🟢 BOTÓN WHATSAPP MEJORADO (Con texto)
+        ========================================== */
         .btn-whatsapp-flotante {
             position: fixed;
             bottom: 50px;
             right: 30px;
             background-color: var(--whatsapp);
             color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
+            padding: 15px 25px; /* Más padding para el texto */
+            border-radius: 50px; /* Forma de píldora */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 35px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            gap: 15px; /* Espacio entre icono y texto */
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
             z-index: 999;
             text-decoration: none;
-            animation: whatsappAlert 3s infinite ease-in-out;
-            transition: transform 0.3s;
+            animation: whatsappAlert 4s infinite ease-in-out;
+            transition: all 0.3s ease;
         }
 
-        .btn-whatsapp-flotante:hover { transform: scale(1.1) rotate(10deg); }
+        .btn-whatsapp-flotante i {
+            font-size: 32px; /* Icono grande */
+        }
+
+        .btn-whatsapp-flotante span {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn-whatsapp-flotante:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
+        }
 
         @keyframes whatsappAlert {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
-            10% { transform: scale(1.1) rotate(-8deg); }
-            20% { transform: scale(1.1) rotate(8deg); }
-            30% { transform: scale(1.1) rotate(-4deg); }
-            40% { transform: scale(1.1) rotate(0deg); box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
-            60% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
+            5% { transform: scale(1.08) rotate(-3deg); }
+            10% { transform: scale(1.08) rotate(3deg); }
+            15% { transform: scale(1.08) rotate(0deg); }
+            20% { transform: scale(1); }
         }
 
-        /* Lightbox */
+        /* ==========================================
+           🖼️ VISOR DE IMÁGENES MEJORADO (Navegación)
+        ========================================== */
         .lightbox {
             display: none;
             position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.94);
+            background-color: rgba(0, 0, 0, 0.95);
             justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s ease;
+            opacity: 0; transition: opacity 0.4s ease;
+            user-select: none; /* Evita seleccionar texto al hacer clic rápido */
         }
         .lightbox.open { display: flex; opacity: 1; }
-        .lightbox-img { max-width: 90%; max-height: 82vh; border-radius: 12px; transform: scale(0.95); transition: transform 0.3s ease; }
+        
+        .lightbox-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 90%;
+            max-height: 85vh;
+        }
+
+        .lightbox-img { 
+            max-width: 100%; 
+            max-height: 85vh; 
+            border-radius: 8px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transform: scale(0.95); 
+            transition: transform 0.4s ease; 
+        }
         .lightbox.open .lightbox-img { transform: scale(1); }
-        .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; }
+        
+        .lightbox-close { 
+            position: absolute; top: -50px; right: 0; 
+            color: rgba(255,255,255,0.8); font-size: 40px; cursor: pointer; 
+            transition: color 0.3s;
+        }
+        .lightbox-close:hover { color: white; }
+
+        /* Botones de Navegación (Flechas) */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .lightbox-prev { left: -80px; }
+        .lightbox-next { right: -80px; }
 
         footer { background-color: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 45px 20px; font-size: 0.9rem; border-top: 3px solid var(--accent); }
 
         /* RESPONSIVE AJUSTES */
+        @media (max-width: 1024px) {
+            /* Mueve las flechas adentro si la pantalla es mediana */
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+            .lightbox-nav { width: 50px; height: 50px; font-size: 24px; background: rgba(0,0,0,0.5); }
+        }
+
         @media (max-width: 768px) {
-            .hero-container { 
-                height: 52vh; 
-                min-height: 360px;
-            }
-            .slide {
-                background-size: cover !important; /* Llena la pantalla en vertical */
-                background-position: center center;
-            }
+            .hero-container { height: 52vh; min-height: 360px; }
+            .slide { background-size: cover !important; background-position: center center; }
             .slide::before { display: none; }
             .hero-container h1 { font-size: 2.1rem; margin-bottom: 8px; padding: 5px 15px; }
             .hero-container p { font-size: 0.95rem; padding: 8px 12px; max-width: 90%; }
             .booking-bar { flex-direction: column; gap: 12px; margin-top: -30px; padding: 18px; width: 92%; }
-            .btn-whatsapp-flotante { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 30px; }
+            
+            /* WhatsApp en móvil más compacto */
+            .btn-whatsapp-flotante { bottom: 20px; right: 20px; padding: 12px 20px; gap: 10px; }
+            .btn-whatsapp-flotante i { font-size: 28px; }
+            .btn-whatsapp-flotante span { font-size: 1rem; }
+            
             .map-container { padding-bottom: 65%; }
+            .lightbox-nav { width: 40px; height: 40px; font-size: 20px; }
+            .lightbox-close { top: -40px; font-size: 30px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 🟢 BOTÓN FLOTANTE ANIMADO DE WHATSAPP (Con Texto) -->
     <a href="#" onclick="enviarConsultaWhatsApp(); return false;" class="btn-whatsapp-flotante">
         <i class="fab fa-whatsapp"></i>
+        <span>Contactanos</span>
     </a>
 
+    <!-- PORTADA -->
     <header class="hero-container">
         <div class="slide active" style="background-image: url('living amplio 2.jpeg')"></div>
         <div class="slide" style="background-image: url('living.jpeg')"></div>
@@ -459,6 +533,7 @@
         <p>Viví la magia de las Cataratas. Descansá en departamentos modernos y completamente equipados en el corazón de Iguazú.</p>
     </header>
 
+    <!-- BARRA INTERACTIVA -->
     <div class="booking-bar">
         <div class="input-group">
             <label for="checkin">Entrada</label>
@@ -487,6 +562,7 @@
     </div>
 
     <div class="container">
+        <!-- COMODIDADES -->
         <section>
             <h2>Tu confort en Iguazú</h2>
             <div class="features">
@@ -523,63 +599,66 @@
             </div>
         </section>
 
+        <!-- 📸 ÁLBUM DE FOTOS UNIFICADO (Navegación continua) -->
         <section>
             <h2>Conocé Estación 285</h2>
-            <div class="gallery-grid">
+            <div class="gallery-grid" id="mainGallery">
                 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="living 2.jpg" alt="Living">
+                <!-- Importante: 'data-index' define el orden en el visor -->
+                <div class="gallery-item" data-index="0">
+                    <img src="living 2.jpg" alt="Living moderno">
                     <div class="gallery-label">Living principal</div>
                 </div>
                 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="Living amplio.jpg" alt="Living amplio">
+                <div class="gallery-item" data-index="1">
+                    <img src="Living amplio.jpg" alt="Vista amplia living">
                     <div class="gallery-label">Espacios luminosos</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="Living amplio 2.jpg" alt="Living amplio 2">
+                <div class="gallery-item" data-index="2">
+                    <img src="Living amplio 2.jpg" alt="Living confortable">
                     <div class="gallery-label">Confort garantizado</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="camas.jpg" alt="Habitación Principal">
+                <div class="gallery-item" data-index="3">
+                    <img src="camas.jpg" alt="Habitación principal camas">
                     <div class="gallery-label">Habitaciones Modernas</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="cuchetas.jpg" alt="Habitación Secundaria">
+                <div class="gallery-item" data-index="4">
+                    <img src="cuchetas.jpg" alt="Habitación secundaria cuchetas">
                     <div class="gallery-label">Camas Adicionales</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="baño.jpg" alt="Baño">
+                <div class="gallery-item" data-index="5">
+                    <img src="baño.jpg" alt="Baño equipado">
                     <div class="gallery-label">Baño Impecable</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="escalera y baño.jpg" alt="Escalera y baño">
+                <div class="gallery-item" data-index="6">
+                    <img src="escalera y baño.jpg" alt="Acceso baño">
                     <div class="gallery-label">Accesos e instalaciones</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="cocina.jpg" alt="Cocina">
+                <div class="gallery-item" data-index="7">
+                    <img src="cocina.jpg" alt="Cocina equipada">
                     <div class="gallery-label">Cocina Completa</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="cocina y mesa.jpg" alt="Cocina y Comedor">
+                <div class="gallery-item" data-index="8">
+                    <img src="cocina y mesa.jpg" alt="Comedor diario">
                     <div class="gallery-label">Comedor diario</div>
                 </div>
 
-                <div class="gallery-item" onclick="abrirImagen(this)">
-                    <img src="patio.jpg" alt="Patio Exterior y Asador">
+                <div class="gallery-item" data-index="9">
+                    <img src="patio.jpg" alt="Patio con parrilla">
                     <div class="gallery-label">Patio y Parrilla</div>
                 </div>
 
             </div>
         </section>
 
+        <!-- OPINIONES -->
         <section class="reviews">
             <h2>Huéspedes felices</h2>
             <div class="review-box">
@@ -593,6 +672,7 @@
             </div>
         </section>
 
+        <!-- UBICACIÓN -->
         <section>
             <h2>Dónde encontrarnos</h2>
             <div class="map-container">
@@ -601,9 +681,17 @@
         </section>
     </div>
 
-    <div id="miLightbox" class="lightbox" onclick="cerrarImagen()">
-        <span class="lightbox-close" onclick="cerrarImagen()">×</span>
-        <img class="lightbox-img" id="imgAmpliada">
+    <!-- 🖼️ INTERFAZ LIGHTBOX CON NAVEGACIÓN -->
+    <div id="miLightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" id="closeLightbox">×</span>
+            
+            <!-- Flechas de navegación -->
+            <button class="lightbox-nav lightbox-prev" id="prevImg">‹</button>
+            <button class="lightbox-nav lightbox-next" id="nextImg">›</button>
+            
+            <img class="lightbox-img" id="imgAmpliada" src="" alt="Imagen ampliada">
+        </div>
     </div>
 
     <footer>
@@ -611,7 +699,7 @@
     </footer>
 
     <script>
-        // Slider automático de la portada
+        // --- Slider automático de la portada ---
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
         function nextSlide() {
@@ -623,19 +711,77 @@
         }
         setInterval(nextSlide, 5000); 
 
-        // Lightbox interactivo
-        function abrirImagen(elemento) {
-            const rutaImagen = elemento.querySelector('img').src;
-            const lightbox = document.getElementById('miLightbox');
-            document.getElementById('imgAmpliada').src = rutaImagen;
-            lightbox.classList.add('open');
+        // --- 🖼️ MOTOR DE GALERÍA UNIFICADA (Flechas) ---
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('miLightbox');
+        const imgAmpliada = document.getElementById('imgAmpliada');
+        const btnClose = document.getElementById('closeLightbox');
+        const btnPrev = document.getElementById('prevImg');
+        const btnNext = document.getElementById('nextImg');
+        
+        let currentIndex = 0; // Almacena qué foto se está viendo
+        const totalImages = galleryItems.length;
+
+        // Función para cargar una imagen específica en el visor
+        function cargarImagen(index) {
+            // Asegurarse de que el índice esté dentro del rango (bucle infinito)
+            if (index < 0) { index = totalImages - 1; }
+            if (index >= totalImages) { index = 0; }
+            
+            currentIndex = index;
+            // Busca la imagen dentro del ítem de la galería correspondiente al índice
+            const rutaImagen = galleryItems[currentIndex].querySelector('img').src;
+            imgAmpliada.src = rutaImagen;
         }
 
-        function cerrarImagen() {
-            document.getElementById('miLightbox').classList.remove('open');
+        // Abrir Lightbox al hacer clic en cualquier foto
+        galleryItems.forEach((item) => {
+            item.addEventListener('click', function() {
+                // Obtiene el índice guardado en 'data-index' (convertido a número)
+                const index = parseInt(this.getAttribute('data-index'));
+                cargarImagen(index);
+                lightbox.classList.add('open');
+            });
+        });
+
+        // Funciones para botones de navegación
+        btnPrev.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita cerrar el lightbox al hacer clic en la flecha
+            cargarImagen(currentIndex - 1);
+        });
+
+        btnNext.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita cerrar el lightbox al hacer clic en la flecha
+            cargarImagen(currentIndex + 1);
+        });
+
+        // Cerrar Lightbox
+        function cerrarLightbox() {
+            lightbox.classList.remove('open');
+            // Opcional: limpiar la fuente de la imagen después de cerrar
+            setTimeout(() => { imgAmpliada.src = ""; }, 400);
         }
 
-        // Sistema dinámico de consultas por WhatsApp
+        btnClose.addEventListener('click', cerrarLightbox);
+        
+        // Cerrar al hacer clic fuera de la imagen
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarLightbox();
+            }
+        });
+
+        // Navegación por teclado (Flechas y Escape)
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return; // Solo si está abierto
+
+            if (e.key === 'ArrowLeft') { cargarImagen(currentIndex - 1); }
+            if (e.key === 'ArrowRight') { cargarImagen(currentIndex + 1); }
+            if (e.key === 'Escape') { cerrarLightbox(); }
+        });
+
+
+        // --- Sistema dinámico de consultas por WhatsApp ---
         function enviarConsultaWhatsApp() {
             const miTelefono = "5493757670865"; 
             const entrada = document.getElementById('checkin').value;
@@ -654,7 +800,7 @@
             window.location.href = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
         }
 
-        // Restricción de fechas pasadas
+        // --- Restricción de fechas pasadas ---
         const hoy = new Date().toISOString().split('T')[0];
         document.getElementById('checkin').min = hoy;
         document.getElementById('checkout').min = hoy;
