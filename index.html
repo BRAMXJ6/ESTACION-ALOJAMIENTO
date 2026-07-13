@@ -38,7 +38,7 @@
         }
 
         /* ==========================================
-           HERO & SLIDER
+           HERO & SLIDER (SIN NINGÚN FILTRO OSCURO)
         ========================================== */
         .hero-container {
             position: relative;
@@ -52,13 +52,13 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            background-color: #f5f8f6;
+            background-color: #e1ebe6; /* Fondo gris/verde claro de respaldo si no carga la foto */
         }
 
         .slide {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-size: contain; 
+            background-size: cover; /* Cambiado a cover para asegurar que llene todo el header */
             background-position: center;
             background-repeat: no-repeat;
             opacity: 0;
@@ -70,20 +70,7 @@
             opacity: 1; 
         }
 
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: -20px; left: -20px; right: -20px; bottom: -20px;
-            background-image: inherit;
-            background-size: cover;
-            background-position: center;
-            filter: blur(25px) brightness(0.6); 
-            z-index: -1;
-        }
-
-        .hero-container::before {
-            display: none !important;
-        }
+        /* Se eliminó por completo el pseudo-elemento ::before que generaba desenfoques oscuros */
 
         .hero-container h1, 
         .hero-container p, 
@@ -115,10 +102,10 @@
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 10px;
-            background: rgba(15, 33, 26, 0.45); 
-            padding: 5px 25px;
+            background: rgba(15, 33, 26, 0.55); /* Contenedor oscuro solo para la letra */
+            padding: 10px 25px;
             border-radius: 12px;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
@@ -126,10 +113,10 @@
             font-size: 1.25rem;
             max-width: 720px;
             font-weight: 400;
-            background: rgba(15, 33, 26, 0.45); 
-            padding: 10px 20px;
+            background: rgba(15, 33, 26, 0.55); /* Contenedor oscuro solo para la letra */
+            padding: 12px 20px;
             border-radius: 10px;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
             text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
             margin-top: 5px;
         }
@@ -383,12 +370,12 @@
             right: 30px;
             background-color: var(--whatsapp);
             color: white;
-            padding: 15px 25px; /* Más padding para el texto */
-            border-radius: 50px; /* Forma de píldora */
+            padding: 15px 25px; 
+            border-radius: 50px; 
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px; /* Espacio entre icono y texto */
+            gap: 15px; 
             box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
             z-index: 999;
             text-decoration: none;
@@ -397,7 +384,7 @@
         }
 
         .btn-whatsapp-flotante i {
-            font-size: 32px; /* Icono grande */
+            font-size: 32px; 
         }
 
         .btn-whatsapp-flotante span {
@@ -429,7 +416,7 @@
             background-color: rgba(0, 0, 0, 0.95);
             justify-content: center; align-items: center;
             opacity: 0; transition: opacity 0.4s ease;
-            user-select: none; /* Evita seleccionar texto al hacer clic rápido */
+            user-select: none; 
         }
         .lightbox.open { display: flex; opacity: 1; }
         
@@ -459,7 +446,7 @@
         }
         .lightbox-close:hover { color: white; }
 
-        /* Botones de Navegación (Flechas) */
+        /* Botones de Navegación */
         .lightbox-nav {
             position: absolute;
             top: 50%;
@@ -489,7 +476,6 @@
 
         /* RESPONSIVE AJUSTES */
         @media (max-width: 1024px) {
-            /* Mueve las flechas adentro si la pantalla es mediana */
             .lightbox-prev { left: 10px; }
             .lightbox-next { right: 10px; }
             .lightbox-nav { width: 50px; height: 50px; font-size: 24px; background: rgba(0,0,0,0.5); }
@@ -498,12 +484,11 @@
         @media (max-width: 768px) {
             .hero-container { height: 52vh; min-height: 360px; }
             .slide { background-size: cover !important; background-position: center center; }
-            .slide::before { display: none; }
             .hero-container h1 { font-size: 2.1rem; margin-bottom: 8px; padding: 5px 15px; }
             .hero-container p { font-size: 0.95rem; padding: 8px 12px; max-width: 90%; }
             .booking-bar { flex-direction: column; gap: 12px; margin-top: -30px; padding: 18px; width: 92%; }
             
-            /* WhatsApp en móvil más compacto */
+            /* WhatsApp en móvil */
             .btn-whatsapp-flotante { bottom: 20px; right: 20px; padding: 12px 20px; gap: 10px; }
             .btn-whatsapp-flotante i { font-size: 28px; }
             .btn-whatsapp-flotante span { font-size: 1rem; }
@@ -516,14 +501,15 @@
 </head>
 <body>
 
-    <!-- 🟢 BOTÓN FLOTANTE ANIMADO DE WHATSAPP (Con Texto) -->
+    <!-- 🟢 BOTÓN FLOTANTE ANIMADO DE WHATSAPP -->
     <a href="#" onclick="enviarConsultaWhatsApp(); return false;" class="btn-whatsapp-flotante">
         <i class="fab fa-whatsapp"></i>
         <span>Contactanos</span>
     </a>
 
-    <!-- PORTADA -->
+    <!-- PORTADA (CORREGIDA Y SIN FILTROS) -->
     <header class="hero-container">
+        <!-- Revisa minuciosamente los nombres de archivo aquí abajo -->
         <div class="slide active" style="background-image: url('living amplio 2.jpeg')"></div>
         <div class="slide" style="background-image: url('living.jpeg')"></div>
         <div class="slide" style="background-image: url('living y cocina.jpeg')"></div>
@@ -599,12 +585,11 @@
             </div>
         </section>
 
-        <!-- 📸 ÁLBUM DE FOTOS UNIFICADO (Navegación continua) -->
+        <!-- 📸 ÁLBUM DE FOTOS UNIFICADO -->
         <section>
             <h2>Conocé Estación 285</h2>
             <div class="gallery-grid" id="mainGallery">
                 
-                <!-- Importante: 'data-index' define el orden en el visor -->
                 <div class="gallery-item" data-index="0">
                     <img src="living 2.jpg" alt="Living moderno">
                     <div class="gallery-label">Living principal</div>
@@ -681,12 +666,11 @@
         </section>
     </div>
 
-    <!-- 🖼️ INTERFAZ LIGHTBOX CON NAVEGACIÓN -->
+    <!-- 🖼️ VISOR (LIGHTBOX) -->
     <div id="miLightbox" class="lightbox">
         <div class="lightbox-content">
             <span class="lightbox-close" id="closeLightbox">×</span>
             
-            <!-- Flechas de navegación -->
             <button class="lightbox-nav lightbox-prev" id="prevImg">‹</button>
             <button class="lightbox-nav lightbox-next" id="nextImg">›</button>
             
@@ -699,7 +683,7 @@
     </footer>
 
     <script>
-        // --- Slider automático de la portada ---
+        // --- Slider automático ---
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
         function nextSlide() {
@@ -711,7 +695,7 @@
         }
         setInterval(nextSlide, 5000); 
 
-        // --- 🖼️ MOTOR DE GALERÍA UNIFICADA (Flechas) ---
+        // --- Visor de imágenes unificado ---
         const galleryItems = document.querySelectorAll('.gallery-item');
         const lightbox = document.getElementById('miLightbox');
         const imgAmpliada = document.getElementById('imgAmpliada');
@@ -719,69 +703,57 @@
         const btnPrev = document.getElementById('prevImg');
         const btnNext = document.getElementById('nextImg');
         
-        let currentIndex = 0; // Almacena qué foto se está viendo
+        let currentIndex = 0; 
         const totalImages = galleryItems.length;
 
-        // Función para cargar una imagen específica en el visor
         function cargarImagen(index) {
-            // Asegurarse de que el índice esté dentro del rango (bucle infinito)
             if (index < 0) { index = totalImages - 1; }
             if (index >= totalImages) { index = 0; }
             
             currentIndex = index;
-            // Busca la imagen dentro del ítem de la galería correspondiente al índice
             const rutaImagen = galleryItems[currentIndex].querySelector('img').src;
             imgAmpliada.src = rutaImagen;
         }
 
-        // Abrir Lightbox al hacer clic en cualquier foto
         galleryItems.forEach((item) => {
             item.addEventListener('click', function() {
-                // Obtiene el índice guardado en 'data-index' (convertido a número)
                 const index = parseInt(this.getAttribute('data-index'));
                 cargarImagen(index);
                 lightbox.classList.add('open');
             });
         });
 
-        // Funciones para botones de navegación
         btnPrev.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita cerrar el lightbox al hacer clic en la flecha
+            e.stopPropagation(); 
             cargarImagen(currentIndex - 1);
         });
 
         btnNext.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita cerrar el lightbox al hacer clic en la flecha
+            e.stopPropagation(); 
             cargarImagen(currentIndex + 1);
         });
 
-        // Cerrar Lightbox
         function cerrarLightbox() {
             lightbox.classList.remove('open');
-            // Opcional: limpiar la fuente de la imagen después de cerrar
             setTimeout(() => { imgAmpliada.src = ""; }, 400);
         }
 
         btnClose.addEventListener('click', cerrarLightbox);
         
-        // Cerrar al hacer clic fuera de la imagen
         lightbox.addEventListener('click', function(e) {
             if (e.target === this) {
                 cerrarLightbox();
             }
         });
 
-        // Navegación por teclado (Flechas y Escape)
         document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('open')) return; // Solo si está abierto
-
+            if (!lightbox.classList.contains('open')) return;
             if (e.key === 'ArrowLeft') { cargarImagen(currentIndex - 1); }
             if (e.key === 'ArrowRight') { cargarImagen(currentIndex + 1); }
             if (e.key === 'Escape') { cerrarLightbox(); }
         });
 
-
-        // --- Sistema dinámico de consultas por WhatsApp ---
+        // --- WhatsApp ---
         function enviarConsultaWhatsApp() {
             const miTelefono = "5493757670865"; 
             const entrada = document.getElementById('checkin').value;
@@ -800,7 +772,6 @@
             window.location.href = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
         }
 
-        // --- Restricción de fechas pasadas ---
         const hoy = new Date().toISOString().split('T')[0];
         document.getElementById('checkin').min = hoy;
         document.getElementById('checkout').min = hoy;
