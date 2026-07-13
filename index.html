@@ -178,7 +178,7 @@
             margin: 10px auto 0;
         }
 
-        /* Características */
+        /* Características mejoradas */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -199,7 +199,7 @@
             margin-bottom: 15px;
         }
 
-        /* NUEVA SECCIÓN: ÁLBUM DE FOTOS (GALLERY) */
+        /* Álbum de Fotos (Gallery Grid) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -213,6 +213,7 @@
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             height: 220px;
+            cursor: pointer;
         }
 
         .gallery-item img {
@@ -234,6 +235,33 @@
             padding: 15px;
             font-size: 1rem;
             font-weight: 600;
+        }
+
+        /* 🖼️ INTERFAZ LIGHTBOX INTERACTIVA PARA LAS IMÁGENES */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         /* Reseñas */
@@ -277,7 +305,7 @@
 
     <!-- PORTADA -->
     <header class="hero-container">
-        <div class="slide active" style="background-image: url('completo.jpeg')"></div>
+        <div class="slide active" style="background-image: url('living amplio.jpeg')"></div>
         <div class="slide" style="background-image: url('living amplio 2.jpeg')"></div>
         
         <div class="badge-descuento">🔥 RESERVA DIRECTA: Mejor Precio Garantizado</div>
@@ -312,14 +340,29 @@
     </div>
 
     <div class="container">
-        <!-- COMODIDADES -->
+        <!-- COMODIDADES (ACTUALIZADAS) -->
         <section>
             <h2>Tu confort en Iguazú</h2>
             <div class="features">
                 <div class="feature-card">
+                    <i class="fa-solid fa-square-parking"></i>
+                    <h3>Parking Privado Gratis</h3>
+                    <p>Dejá tu vehículo seguro dentro del establecimiento sin costo adicional.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <h3>Parrilla / Asador</h3>
+                    <p>Espacio ideal para preparar un buen asado al terminar el día.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-tree"></i>
+                    <h3>Patio Exterior</h3>
+                    <p>Un sector al aire libre para relajarse y disfrutar del clima misionero.</p>
+                </div>
+                <div class="feature-card">
                     <i class="fa-solid fa-snowflake"></i>
                     <h3>Aire Acondicionado</h3>
-                    <p>Climatización perfecta en todos los ambientes.</p>
+                    <p>Climatización perfecta y confort térmico en todos los ambientes.</p>
                 </div>
                 <div class="feature-card">
                     <i class="fa-solid fa-utensils"></i>
@@ -331,42 +374,41 @@
                     <h3>Wi-Fi Premium</h3>
                     <p>Conexión estable y veloz para planificar tus días.</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <h3>Ubicación Clave</h3>
-                    <p>Zona tranquila, segura y de rápido acceso.</p>
-                </div>
             </div>
         </section>
 
-        <!-- 📸 NUEVA SECCIÓN: ÁLBUM DE NUESTROS ESPACIOS -->
+        <!-- ÁLBUM DE NUESTROS ESPACIOS -->
         <section>
             <h2>Conocé Estación 285</h2>
             <div class="gallery-grid">
                 
-                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto de la Habitación -->
-                <div class="gallery-item">
-                    <img src="habitacion.jpg" alt="Habitación Principal">
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="camas.jpg" alt="Habitación Principal">
+                    <img src="cuchetas.jpg" alt="Habitación Principal">
                     <div class="gallery-label">Habitaciones Modernas</div>
                 </div>
 
-                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto del Baño -->
-                <div class="gallery-item">
-                    <img src="baño.jpg" alt="Baño">
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="bano.jpg" alt="Baño">
                     <div class="gallery-label">Baño Equipado e Impecable</div>
                 </div>
 
-                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto del Living/Cocina -->
-                <div class="gallery-item">
-                    <img src="cocina.jpg" alt="Cocina ">
-                    <img src="cocina y mesa.jpg" alt="Cocina y comerdor "
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="cocina.jpg" alt="Cocina Living">
+                     <img src="cocina y mesa.jpg" alt="Cocina y comedor">
                     <div class="gallery-label">Cocina y Comedor Completo</div>
                 </div>
 
-                <!-- 🛠️ CAMBIAR ACÁ: Poné el nombre de tu foto del Patio o Fachada -->
-                <div class="gallery-item">
-                    <img src="patio.jpg" alt="Patio Exterior">
-                    <div class="gallery-label">Accesos y Exteriores</div>
+                <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="patio.jpg" alt="Patio Exterior y Asador">
+                    <div class="gallery-label">Patio y Parrilla</div>
+                </div>
+                 <div class="gallery-item" onclick="abrirImagen(this)">
+                    <img src="living2.jpeg" alt="living">
+                    <img src="living amplio.jpeg" alt="living">
+                    <img src="living y cocina.jpeg" alt="living">        
+                     
+                    <div class="gallery-label">living</div>
                 </div>
 
             </div>
@@ -391,6 +433,12 @@
         </section>
     </div>
 
+    <!-- PANTALLA FLOTANTE PARA VER LA IMAGEN GRANDE -->
+    <div id="miLightbox" class="lightbox" onclick="cerrarImagen()">
+        <span class="lightbox-close" onclick="cerrarImagen()">&times;</span>
+        <img class="lightbox-img" id="imgAmpliada">
+    </div>
+
     <footer>
         <p>© 2026 Estación 285 - Puerto Iguazú, Misiones, Argentina.</p>
     </footer>
@@ -408,11 +456,20 @@
         }
         setInterval(nextSlide, 5000); 
 
-        // MOTOR DE WHATSAPP REPARADO Y OPTIMIZADO
+        // FUNCIONES PARA CONTROLAR EL ÁLBUM INTERACTIVO (Evita Google Lens)
+        function abrirImagen(elemento) {
+            const rutaImagen = elemento.querySelector('img').src;
+            document.getElementById('imgAmpliada').src = rutaImagen;
+            document.getElementById('miLightbox').style.display = 'flex';
+        }
+
+        function cerrarImagen() {
+            document.getElementById('miLightbox').style.display = 'none';
+        }
+
+        // MOTOR DE WHATSAPP
         function enviarConsultaWhatsApp() {
-            // Número limpio y sin espacios de Argentina
             const miTelefono = "5493757670865"; 
-            
             const entrada = document.getElementById('checkin').value;
             const salida = document.getElementById('checkout').value;
             const huespedes = document.getElementById('guests').value;
@@ -426,10 +483,7 @@
             }
 
             const mensajeEncriptado = encodeURIComponent(mensaje);
-            
-            // Enlace universal para que abra sí o sí en PC y celulares
             const urlWhatsApp = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
-            
             window.location.href = urlWhatsApp;
         }
 
