@@ -98,27 +98,31 @@
             100% { transform: scale(1); }
         }
 
-        .hero-container h1 {
+      .hero-container h1 {
             font-size: 4rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            background: rgba(15, 33, 26, 0.55); /* Contenedor oscuro solo para la letra */
-            padding: 10px 25px;
-            border-radius: 12px;
-            backdrop-filter: blur(4px);
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
+            color: #ffffff;
+            /* Quitamos el fondo y el blur, dejamos solo una sombra de texto impecable */
+            background: none; 
+            backdrop-filter: none;
+            padding: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 
+                         0px 0px 10px rgba(0, 0, 0, 0.5);
         }
 
         .hero-container p {
             font-size: 1.25rem;
-            max-width: 720px;
+            max-width: 750px;
             font-weight: 400;
-            background: rgba(15, 33, 26, 0.55); /* Contenedor oscuro solo para la letra */
-            padding: 12px 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(4px);
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            color: #ffffff;
+            /* Quitamos el fondo y el blur aquí también */
+            background: none; 
+            backdrop-filter: none;
+            padding: 0;
             margin-top: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8), 
+                         0px 0px 8px rgba(0, 0, 0, 0.5);
         }
 
         /* ==========================================
