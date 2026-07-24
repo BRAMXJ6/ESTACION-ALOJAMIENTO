@@ -750,23 +750,61 @@
         <p>© 2026 Estación 285 - Puerto Iguazú, Misiones, Argentina.</p>
     </footer>
 
+    <!-- ==========================================
+        JS / LÓGICA Y FUNCIONALIDAD DEL SITIO
+    ========================================== -->
     <script>
-        // --- Slider automático ---
-        const slides = document.querySelectorAll('.slide');
+        // --- 1. SLIDER DE PORTADA (HERO) ---
         let currentSlide = 0;
-        function nextSlide() {
-            if(slides.length > 0) {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }
-        }
-        setInterval(nextSlide, 5000); 
+        const slides = document.querySelectorAll('.slide');
 
-        // --- Visor de imágenes unificado ---
+        function nextSlide() {
+            if (slides.length === 0) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        if (slides.length > 0) {
+            setInterval(nextSlide, 5000); // Cambia la foto cada 5 segundos
+        }
+
+        // --- 2. CARRUSEL DE RESEÑAS / OPINIONES ---
+        let currentReview = 0;
+        const reviews = document.querySelectorAll('.review-box');
+        const dots = document.querySelectorAll('.dot');
+
+        function mostrarResena(index) {
+            if (reviews.length === 0) return;
+            
+            if (index < 0) index = reviews.length - 1;
+            if (index >= reviews.length) index = 0;
+            
+            reviews.forEach(r => r.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            currentReview = index;
+            reviews[currentReview].classList.add('active');
+            dots[currentReview].classList.add('active');
+        }
+
+        function cambiarResena(direccion) {
+            mostrarResena(currentReview + direccion);
+        }
+
+        function irAResena(index) {
+            mostrarResena(index);
+        }
+
+        // Auto-cambio de reseña cada 7 segundos
+        setInterval(() => {
+            cambiarResena(1);
+        }, 7000);
+
+        // --- 3. VISOR DE FOTOS (LIGHTBOX / GALERÍA) ---
         const galleryItems = document.querySelectorAll('.gallery-item');
-        const lightbox = document.getElementById('miLightbox');
-        const imgAmpliada = document.getElementById('imgAmpliada');
+        const lightbox = document.getElementById('miLightbox') || document.getElementById('lightbox');
+        const imgAmpliada = document.getElementById('imgAmpliada') || document.getElementById('lightboxImg');
         const btnClose = document.getElementById('closeLightbox');
         const btnPrev = document.getElementById('prevImg');
         const btnNext = document.getElementById('nextImg');
@@ -775,74 +813,98 @@
         const totalImages = galleryItems.length;
 
         function cargarImagen(index) {
+            if (totalImages === 0) return;
             if (index < 0) { index = totalImages - 1; }
             if (index >= totalImages) { index = 0; }
             
             currentIndex = index;
-            const rutaImagen = galleryItems[currentIndex].querySelector('img').src;
-            imgAmpliada.src = rutaImagen;
+            const imgElem = galleryItems[currentIndex].querySelector('img');
+            if (imgElem && imgAmpliada) {
+                imgAmpliada.src = imgElem.src;
+            }
         }
 
-        galleryItems.forEach((item) => {
+        galleryItems.forEach((item, index) => {
             item.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                cargarImagen(index);
-                lightbox.classList.add('open');
+                const dataIndex = this.getAttribute('data-index');
+                const idx = dataIndex !== null ? parseInt(dataIndex) : index;
+                cargarImagen(idx);
+                if (lightbox) lightbox.classList.add('open');
             });
         });
 
-        btnPrev.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            cargarImagen(currentIndex - 1);
-        });
-
-        btnNext.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            cargarImagen(currentIndex + 1);
-        });
-
-        function cerrarLightbox() {
-            lightbox.classList.remove('open');
-            setTimeout(() => { imgAmpliada.src = ""; }, 400);
+        if (btnPrev) {
+            btnPrev.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                cargarImagen(currentIndex - 1);
+            });
         }
 
-        btnClose.addEventListener('click', cerrarLightbox);
-        
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === this) {
-                cerrarLightbox();
+        if (btnNext) {
+            btnNext.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                cargarImagen(currentIndex + 1);
+            });
+        }
+
+        function cerrarLightbox() {
+            if (lightbox) {
+                lightbox.classList.remove('open');
+                setTimeout(() => { if (imgAmpliada) imgAmpliada.src = ""; }, 400);
             }
-        });
+        }
+
+        if (btnClose) btnClose.addEventListener('click', cerrarLightbox);
+        
+        if (lightbox) {
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    cerrarLightbox();
+                }
+            });
+        }
 
         document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('open')) return;
+            if (!lightbox || !lightbox.classList.contains('open')) return;
             if (e.key === 'ArrowLeft') { cargarImagen(currentIndex - 1); }
             if (e.key === 'ArrowRight') { cargarImagen(currentIndex + 1); }
             if (e.key === 'Escape') { cerrarLightbox(); }
         });
 
-        // --- WhatsApp ---
+        // --- 4. BOTÓN WHATSAPP Y FECHAS MÍNIMAS ---
         function enviarConsultaWhatsApp() {
             const miTelefono = "5493757670865"; 
-            const entrada = document.getElementById('checkin').value;
-            const salida = document.getElementById('checkout').value;
-            const huespedes = document.getElementById('guests').value;
+            const checkinElem = document.getElementById('checkin');
+            const checkoutElem = document.getElementById('checkout');
+            const guestsElem = document.getElementById('guests') || document.getElementById('huespedes');
 
-            let mensaje = "¡Hola Estación 285! Vi la página web y quería consultar por disponibilidad.";
+            const entrada = checkinElem ? checkinElem.value : '';
+            const salida = checkoutElem ? checkoutElem.value : '';
+            const huespedes = guestsElem ? guestsElem.value : '';
+
+            let mensaje = "¡Hola Estación 285! Vi la página web y quería consultar por disponibilidad con la oferta del 15% OFF.";
             
-            if(entrada && salida) {
+            if (entrada && salida) {
                 mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${salida}\n👥 Huéspedes: ${huespedes}`;
             } else if (huespedes) {
                 mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad para un viaje de ${huespedes} personas.`;
             }
 
-            const mensajeEncriptado = encodeURIComponent(mensaje);
-            window.location.href = `https://api.whatsapp.com/send?phone=${miTelefono}&text=${mensajeEncriptado}`;
+            const url = `https://wa.me/${miTelefono}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
         }
 
+        // Mantener función alternativa por compatibilidad
+        function enviarWhatsApp() {
+            enviarConsultaWhatsApp();
+        }
+
+        // Bloquear fechas pasadas en los calendarios
         const hoy = new Date().toISOString().split('T')[0];
-        document.getElementById('checkin').min = hoy;
-        document.getElementById('checkout').min = hoy;
+        const inputCheckin = document.getElementById('checkin');
+        const inputCheckout = document.getElementById('checkout');
+        if (inputCheckin) inputCheckin.min = hoy;
+        if (inputCheckout) inputCheckout.min = hoy;
     </script>
 </body>
 </html>
