@@ -871,7 +871,7 @@
             if (e.key === 'Escape') { cerrarLightbox(); }
         });
 
-        // --- 4. BOTÓN WHATSAPP Y FECHAS MÍNIMAS ---
+       // --- 4. BOTÓN WHATSAPP Y FECHAS MÍNIMAS ---
         function enviarConsultaWhatsApp() {
             const miTelefono = "5493757670865"; 
             const checkinElem = document.getElementById('checkin');
@@ -885,7 +885,18 @@
             let mensaje = "¡Hola Estación 285! Vi la página web y quería consultar por disponibilidad con la oferta del 15% OFF.";
             
             if (entrada && salida) {
-                mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${salida}\n👥 Huéspedes: ${huespedes}`;
+                // Cálculo de las noches
+                const fEntrada = new Date(entrada + 'T00:00:00');
+                const fSalida = new Date(salida + 'T00:00:00');
+                const diferenciaMs = fSalida - fEntrada;
+                const noches = Math.round(diferenciaMs / (1000 * 60 * 60 * 24));
+
+                // Construcción del mensaje con noches
+                if (noches > 0) {
+                    mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${salida}\n🌙 Cantidad de noches: ${noches}\n👥 Huéspedes: ${huespedes}`;
+                } else {
+                    mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad:\n\n📅 Entrada: ${entrada}\n📅 Salida: ${salida}\n👥 Huéspedes: ${huespedes}`;
+                }
             } else if (huespedes) {
                 mensaje = `¡Hola Estación 285! Vi la web y quiero consultar disponibilidad para un viaje de ${huespedes} personas.`;
             }
