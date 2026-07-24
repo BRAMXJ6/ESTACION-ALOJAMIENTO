@@ -656,17 +656,49 @@
             </div>
         </section>
 
-        <!-- OPINIONES -->
+  <!-- OPINIONES / RESEÑAS -->
         <section class="reviews">
             <h2>Huéspedes felices</h2>
-            <div class="review-box">
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <div class="review-slider-container">
+                
+                <!-- Reseña 1 -->
+                <div class="review-box active">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"El departamento es hermoso, super moderno y limpio. Los anfitriones super atenciosos. Muy cerca de todo para ir a las Cataratas."</p>
+                    <strong class="review-author">- Huésped de Booking.com</strong>
                 </div>
-                <p>"El departamento es hermoso, super moderno y limpio. La atención excelente. Muy cerca de todo para ir a las Cataratas."</p>
-                <strong style="display:block; margin-top:15px; font-size:0.9rem; color:rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px;">
-                    - Huésped de Booking.com
-                </strong>
+
+                <!-- Reseña 2 -->
+                <div class="review-box">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Superó nuestras expectativas. Todo impecable, el aire acondicionado funciona de diez para el calor de Iguazú y poder estacionar el auto adentro da mucha tranquilidad."</p>
+                    <strong class="review-author">- Familia R. (Google Reviews)</strong>
+                </div>
+
+                <!-- Reseña 3 -->
+                <div class="review-box">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>" Nos quedamos 3 noches, La parrilla en el patio fue clave para los asados a la noche. La cocina super completa, el wifi funciona bien y la atención súper amable. Volveríamos sin dudarlo."</p>
+                    <strong class="review-author">- Carlos M. (Reserva Directa)</strong>
+                </div>
+
+            </div>
+
+            <!-- Controles de navegación de reseñas -->
+            <div class="review-controls">
+                <button onclick="cambiarResena(-1)" class="review-btn">❮</button>
+                <div class="review-dots" id="reviewDots">
+                    <span class="dot active" onclick="irAResena(0)"></span>
+                    <span class="dot" onclick="irAResena(1)"></span>
+                    <span class="dot" onclick="irAResena(2)"></span>
+                </div>
+                <button onclick="cambiarResena(1)" class="review-btn">❯</button>
             </div>
         </section>
 
